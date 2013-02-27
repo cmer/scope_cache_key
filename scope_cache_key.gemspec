@@ -24,4 +24,5 @@ Gem::Specification.new do |gem|
   gem.add_development_dependency('pg')
   gem.add_development_dependency('faker', '~> 1.1.2')
   gem.add_development_dependency('pry')
+  gem.add_development_dependency('rake')
 end
