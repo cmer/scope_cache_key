@@ -11,6 +11,8 @@ This should likely be used in a Russian Doll Caching scenario.
 NOTE: This currently only works with Postgresql. Adding support for MySQL should
 be trivial.
 
+[![Build Status](https://secure.travis-ci.org/cmer/scope_cache_key.png?branch=master)](http://travis-ci.org/cmer/scope_cache_key)
+
 ## Installation
 
 Add this line to your application's Gemfile:
