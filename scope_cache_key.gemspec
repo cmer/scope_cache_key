@@ -21,7 +21,6 @@ Gem::Specification.new do |gem|
   gem.add_development_dependency('rspec', '~> 2.13.0')
   gem.add_development_dependency('activerecord', '~> 3.2.12')
   gem.add_development_dependency('actionpack', '~> 3.2.12')
-  gem.add_development_dependency('pg')
   gem.add_development_dependency('faker', '~> 1.1.2')
   gem.add_development_dependency('pry')
   gem.add_development_dependency('rake')
