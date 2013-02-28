@@ -1,3 +1,4 @@
+DB_NAME = "scope_cache_key_test"
 require 'rubygems'
 require 'bundler/setup'
 
@@ -22,15 +23,16 @@ RSpec.configure do |config|
   config.order = 'random'
 end
 
-ActiveRecord::Base.configurations = {'postgresql' => {:adapter => 'postgresql', :database => 'scope_cache_key_test'}}
+ActiveRecord::Base.configurations = {'postgresql' => {:adapter => 'postgresql', :database => 'postgres'}}
 ActiveRecord::Base.establish_connection('postgresql')
-
+ActiveRecord::Base.connection.drop_database(DB_NAME) rescue nil
+ActiveRecord::Base.connection.create_database(DB_NAME)
+ActiveRecord::Base.configurations = {'postgresql' => {:adapter => 'postgresql', :database => DB_NAME}}
+ActiveRecord::Base.establish_connection('postgresql')
 ActiveRecord::Base.logger = Logger.new(STDERR)
 ActiveRecord::Base.logger.level = Logger::WARN
 
 ActiveRecord::Migration.verbose = false
-ActiveRecord::Base.connection.execute("DROP TABLE articles;")
-ActiveRecord::Base.connection.execute("DROP TABLE comments;")
 
 ActiveRecord::Schema.define(:version => 0) do
   create_table :articles do |t|
