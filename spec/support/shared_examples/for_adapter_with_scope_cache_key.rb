@@ -1,6 +1,4 @@
-require 'spec_helper'
-
-describe ScopeCacheKey do
+shared_examples_for "an adapter with scope_cache_key" do
   before(:all) do
     @article = create_article
     create_comment(Article.first, 100)
@@ -100,10 +98,5 @@ describe ScopeCacheKey do
     it "is faster than computing MD5 in Ruby" do
       @cache_key_time.should < @ruby_time
     end
-  end
-
-  def md5(scope)
-    string = scope.all.map { |i| "\"#{i.id}-#{i.updated_at_before_type_cast}\"" }.join(",")
-    Digest::MD5.hexdigest "{#{string}}"
   end
 end
