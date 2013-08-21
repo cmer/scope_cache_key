@@ -20,7 +20,7 @@ shared_examples_for "an adapter with scope_cache_key" do
     context "after a record is updated" do
       it "returns the correct value" do
         old_key = Comment.cache_key
-        Comment.first.touch
+        Comment.first.update_attributes(updated_at: Time.now + 2.seconds)
         Comment.cache_key.should_not == old_key
       end
     end
@@ -81,22 +81,6 @@ shared_examples_for "an adapter with scope_cache_key" do
       objects = ['v1', Comment, Comment.where('1=2')]
       controller.fragment_cache_key(objects).should end_with(
         "v1/#{Comment.cache_key}/comments/empty")
-    end
-  end
-
-  context "performance" do
-    before :all do
-      @query_time     = Benchmark.realtime { Comment.all }
-      @cache_key_time = Benchmark.realtime { Comment.cache_key }
-      @ruby_time      = Benchmark.realtime { md5(Comment) }
-    end
-
-    it "is faster than running the query" do
-      @cache_key_time.should < @query_time
-    end
-
-    it "is faster than computing MD5 in Ruby" do
-      @cache_key_time.should < @ruby_time
     end
   end
 end
