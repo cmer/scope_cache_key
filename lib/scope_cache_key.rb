@@ -22,7 +22,7 @@ module ScopeCacheKey
     sql = "SELECT md5(array_agg(id || '-' || updated_at)::text) " +
           "FROM (#{scope_sql}) as query"
 
-    md5 = connection.select_value(sql)
+    md5 = connection.select_value(sql, nil, where(nil).bind_values)
 
     key = if md5.present?
       md5
