@@ -17,7 +17,8 @@ module ScopeCacheKey
   #   Item.active.cache_key # => "0b27dac757428d88c0f3a0298eb0278e"
   #
   def cache_key
-    scope_sql = where(nil).select("#{table_name}.id, #{table_name}.updated_at").to_sql
+    #scope_sql = where(nil).select("#{table_name}.id, #{table_name}.updated_at").to_sql
+    scope_sql = "select #{table_name}.id, #{table_name}.updated_at from #{table_name}"
 
     sql = "SELECT md5(array_agg(id || '-' || updated_at)::text) " +
           "FROM (#{scope_sql}) as query"
