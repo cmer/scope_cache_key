@@ -35,6 +35,7 @@ private
 
   def mysql_cache_key
     scope_sql = scoped.select("#{table_name}.id, #{table_name}.updated_at").to_sql
+    return nil unless scope_sql.present?
 
     sql = "SELECT CONCAT(`id`, '-', `updated_at`) " +
           "FROM (#{scope_sql}) as query"
