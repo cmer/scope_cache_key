@@ -8,7 +8,7 @@ module ScopeCacheKey
     case ActiveRecord::Base.configurations[Rails.env.to_s]['adapter']
     when "postgresql"
       postgres_cache_key
-    when "mysql2", "mysql"
+    when /mysql/
       mysql_cache_key
     else
       raise "ScopeCacheKey works only with MySQL or PostgreSQL."
