@@ -17,7 +17,7 @@ be trivial.
 
 Add this line to your application's Gemfile:
 
-    gem 'scope_cache_key'
+    gem 'scope_cache_key', github: 'yonahforst/scope_cache_key'
 
 ## Usage
 
