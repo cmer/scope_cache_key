@@ -19,6 +19,8 @@ module ScopeCacheKey
   def cache_key
     scope_sql = where(nil).select("#{table_name}.id, #{table_name}.updated_at").to_sql
 
+    return "empty" unless scope_sql.present?
+
     sql = "SELECT md5(array_agg(id || '-' || updated_at)::text) " +
           "FROM (#{scope_sql}) as query"
 
